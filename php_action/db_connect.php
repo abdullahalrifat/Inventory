@@ -2,7 +2,7 @@
 
 $localhost = "localhost";
 $username = "root";
-$password = "";
+$password = "000000";
 $dbname = "stock";
 
 // db connection

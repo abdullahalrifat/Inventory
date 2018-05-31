@@ -25,7 +25,9 @@ if($result->num_rows > 0) {
  	// active 
  	if($row[4] == 1) { 		
  		$paymentStatus = "<label class='label label-success'>Full Payment</label>";
- 	} else if($row[4] == 2) { 		
+ 	} else if($row[4] == 2) {
+        $paymentStatus = "<label class='label label-info'>Partial Payment</label>";
+    } else if($row[4] == 3) {
  		$paymentStatus = "<label class='label label-info'>Advance Payment</label>";
  	} else { 		
  		$paymentStatus = "<label class='label label-warning'>No Payment</label>";

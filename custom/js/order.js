@@ -524,6 +524,7 @@ function getProductData(row = null) {
 
 // table total
 function getTotal(row = null) {
+	//alert("sparing");
 	if(row) {
 		var total = Number($("#rate"+row).val()) * Number($("#quantity"+row).val());
 		total = total.toFixed(2);

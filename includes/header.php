@@ -67,9 +67,18 @@
             <li id="topNavAddOrder"><a href="orders.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Add Orders</a></li>            
             <li id="topNavManageOrder"><a href="orders.php?o=manord"> <i class="glyphicon glyphicon-edit"></i> Manage Orders</a></li>            
           </ul>
-        </li> 
+        </li>
 
-        <li id="navReport"><a href="report.php"> <i class="glyphicon glyphicon-check"></i> Report </a></li>
+          <li class="dropdown" id="navAccountingData">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-briefcase"></i> Office  <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                  <li id="navEntry"><a href="Entry.php?o=manord"> <i class="glyphicon glyphicon-plus"></i> Add Entry</a></li>
+                  <li id="navAccounting"><a href="Accounting.php?o=add"> <i class="glyphicon glyphicon-book"></i> Accounting</a></li>
+                  <li id="navLeaser"><a href="leaser.php?o=manord"> <i class="glyphicon glyphicon-list-alt"></i> Leaser</a></li>
+              </ul>
+          </li>
+
+          <li id="navReport"><a href="report.php"> <i class="glyphicon glyphicon-check"></i> Report </a></li>
 
         <li class="dropdown" id="navSetting">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-user"></i> <span class="caret"></span></a>

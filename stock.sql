@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 25, 2018 at 06:37 PM
--- Server version: 10.1.26-MariaDB
--- PHP Version: 7.1.9
+-- Generation Time: May 28, 2018 at 02:00 PM
+-- Server version: 5.7.22-0ubuntu0.16.04.1
+-- PHP Version: 7.2.5-1+ubuntu16.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,42 @@ SET time_zone = "+00:00";
 --
 -- Database: `stock`
 --
+
+-- --------------------------------------------------------
+--
+-- Table structure for table `ExpenceType`
+--
+
+CREATE TABLE `ExpenceType` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) NOT NULL,
+  `Type` varchar(255) NOT NULL,
+  PRIMARY KEY (id)
+
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ExpenceType`
+--
+
+INSERT INTO `ExpenceType` (`id`, `Name`, `Type`) VALUES
+(4, 'Salary', '2'),
+(5, 'b', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Accounting`
+--
+
+CREATE TABLE `Accounting` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Entry` int(11) NOT NULL,
+  `Amount` double NOT NULL,
+  `Date` date NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (Entry) REFERENCES ExpenceType(id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='';
 
 -- --------------------------------------------------------
 
@@ -85,9 +121,11 @@ INSERT INTO `categories` (`categories_id`, `categories_name`, `categories_active
 (7, 'Casual wear', 1, 2),
 (8, 'Sports ', 1, 2),
 (9, 'Laptop', 1, 2),
-(10, 'Laptop', 1, 1);
+(10, 'Laptop', 1, 1),
+(11, 'Electronic', 1, 1);
 
 -- --------------------------------------------------------
+
 
 --
 -- Table structure for table `orders`
@@ -139,7 +177,8 @@ INSERT INTO `orders` (`order_id`, `order_date`, `client_name`, `client_contact`,
 (22, '2018-05-14', '1', '1', '1000.00', '0.00', '1000.00', '0', '1000.00', '1000', '0.00', 2, 1, 1),
 (23, '2018-05-15', '1', '1', '1000.00', '0.00', '1000.00', '0', '1000.00', '1000', '0.00', 2, 1, 1),
 (24, '2018-05-15', '1', '1', '1000.00', '0.00', '1000.00', '0', '1000.00', '1000', '0.00', 2, 1, 1),
-(25, '2018-05-15', '3', '3', '1000.00', '0.00', '1000.00', '0', '1000.00', '1000', '0.00', 2, 1, 1);
+(25, '2018-05-15', '3', '3', '1000.00', '0.00', '1000.00', '0', '1000.00', '1000', '0.00', 2, 1, 1),
+(26, '2018-05-29', 'Sadik', '01521208218', '5000.00', '0', '5000.00', '500', '4500.00', '3500', '1000', 2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -190,7 +229,8 @@ INSERT INTO `order_item` (`order_item_id`, `order_id`, `product_id`, `quantity`,
 (26, 22, 10, '1', '1000', '1000.00', 1),
 (27, 23, 10, '1', '1000', '1000.00', 1),
 (28, 24, 10, '1', '1000', '1000.00', 1),
-(29, 25, 10, '1', '1000', '1000.00', 1);
+(29, 25, 10, '1', '1000', '1000.00', 1),
+(31, 26, 10, '5', '1000', '5000.00', 1);
 
 -- --------------------------------------------------------
 
@@ -224,7 +264,7 @@ INSERT INTO `product` (`product_id`, `product_name`, `product_image`, `brand_id`
 (7, 'Half Pant', '../assests/images/stock/1770257893463579bf.jpg', 11, 7, '16', '1200', 2, 2),
 (8, 'Polo T-shirt', '../assests/images/stock/136715789347d1aea6.jpg', 12, 7, '9', '1200', 2, 2),
 (9, 'Zenbook', '../assests/images/stock/3846488395acfa030ca0e4.png', 14, 9, '7', '42300', 2, 2),
-(10, 'asus', '../assests/images/stock/3801956495ada29211b29b.jpg', 16, 10, '94', '1000', 1, 1);
+(10, 'asus', '../assests/images/stock/3801956495ada29211b29b.jpg', 16, 10, '89', '1000', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -250,6 +290,7 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `email`) VALUES
 -- Indexes for dumped tables
 --
 
+
 --
 -- Indexes for table `brands`
 --
@@ -261,6 +302,7 @@ ALTER TABLE `brands`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`categories_id`);
+
 
 --
 -- Indexes for table `orders`
@@ -290,6 +332,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for dumped tables
 --
 
+
 --
 -- AUTO_INCREMENT for table `brands`
 --
@@ -300,19 +343,20 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `categories_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `categories_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `order_item`
 --
 ALTER TABLE `order_item`
-  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `product`

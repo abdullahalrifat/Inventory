@@ -207,8 +207,9 @@ if($_GET['o'] == 'add') {
 				      <select class="form-control" name="paymentStatus" id="paymentStatus">
 				      	<option value="">~~SELECT~~</option>
 				      	<option value="1">Full Payment</option>
-				      	<option value="2">Advance Payment</option>
-				      	<option value="3">No Payment</option>
+                          <option value="2">Partial Payment</option>
+				      	<option value="3">Advance Payment</option>
+				      	<option value="4">No Payment</option>
 				      </select>
 				    </div>
 				  </div> <!--/form-group-->							  
@@ -433,10 +434,13 @@ if($_GET['o'] == 'add') {
 				      	<option value="1" <?php if($data[12] == 1) {
 				      		echo "selected";
 				      	} ?>  >Full Payment</option>
-				      	<option value="2" <?php if($data[12] == 2) {
+                          <option value="2" <?php if($data[12] == 2) {
+                              echo "selected";
+                          } ?>  >Partial Payment</option>
+				      	<option value="3" <?php if($data[12] == 3) {
 				      		echo "selected";
 				      	} ?> >Advance Payment</option>
-				      	<option value="3" <?php if($data[10] == 3) {
+				      	<option value="4" <?php if($data[10] == 4) {
 				      		echo "selected";
 				      	} ?> >No Payment</option>
 				      </select>
@@ -508,8 +512,9 @@ if($_GET['o'] == 'add') {
 			      <select class="form-control" name="paymentStatus" id="paymentStatus">
 			      	<option value="">~~SELECT~~</option>
 			      	<option value="1">Full Payment</option>
-			      	<option value="2">Advance Payment</option>
-			      	<option value="3">No Payment</option>
+                      <option value="2">Partial Payment</option>
+			      	<option value="3">Advance Payment</option>
+			      	<option value="4">No Payment</option>
 			      </select>
 			    </div>
 			  </div> <!--/form-group-->							  				  
