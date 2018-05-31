@@ -2,7 +2,7 @@
 
 require_once 'core.php';
 
-$sql = "SELECT accounting.id, expencetype.Name, expencetype.Type,Amount,Date 
+$sql = "SELECT accounting.id, expencetype.Name, expencetype.Type,Amount,Date,expencetype.id
 FROM accounting,expencetype where accounting.Entry=expencetype.id";
 $result = $connect->query($sql);
 
@@ -46,8 +46,8 @@ if($result->num_rows > 0) {
 	    Action <span class=\"caret\"></span>
 	  </button>";
         echo "<ul class=\"dropdown-menu\">
-	    <li><a type=\"button\" data-toggle=\"modal\" id=\"editCategoriesModalBtn\" data-target=\"#editCategoriesModal\" onclick=\"editExpenseType('$row[0]','$row[1]','$row[2]','$row[3]')\"> <i class=\"glyphicon glyphicon-edit\"></i> Edit</a></li>
-	    <li><a type=\"button\" data-toggle=\"modal\" data-target=\"#removeCategoriesModal\" id=\"removeCategoriesModalBtn\" onclick=\"removeExpenseType($row[0])\"> <i class=\"glyphicon glyphicon-trash\"></i> Remove</a></li>       
+	    <li><a type=\"button\" data-toggle=\"modal\" id=\"editCategoriesModalBtn\" data-target=\"#editCategoriesModal\" onclick=\"editEntry('$row[0]','$row[5]','$row[3]','$row[4]')\"> <i class=\"glyphicon glyphicon-edit\"></i> Edit</a></li>
+	    <li><a type=\"button\" data-toggle=\"modal\" data-target=\"#removeCategoriesModal\" id=\"removeCategoriesModalBtn\" onclick=\"removeEntry($row[0])\"> <i class=\"glyphicon glyphicon-trash\"></i> Remove</a></li>       
 	  </ul>";
         echo "</div>";
         echo "</td>";

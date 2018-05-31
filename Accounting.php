@@ -193,6 +193,7 @@
                 //when found names sending them in datalist for suggetions
 
                 alert("Successfully Deleted");
+                window.open("Accounting.php","_self");
             }
         });
     }

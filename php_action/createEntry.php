@@ -9,10 +9,12 @@ if($_POST) {
     $entryName = $_POST['categoriesStatus'];
     $entryAmount = $_POST['entryAmount'];
     $entryDate = $_POST['startDate'];
+    $date = DateTime::createFromFormat('m/d/Y',$entryDate);
+    $entryDate = $date->format("Y-m-d");
 
     $sql = "INSERT INTO accounting (id, Entry, Amount, Date) 
 	VALUES (0,'$entryName', '$entryAmount', '$entryDate')";
-
+    //echo $sql;
     if($connect->query($sql) === TRUE) {
         $valid['success'] = true;
         $valid['messages'] = "Successfully Added";

@@ -100,7 +100,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form class="form-horizontal" id="editCategoriesForm" action="php_action/editCategories.php" method="POST">
+                <form class="form-horizontal" id="editCategoriesForm" method="POST">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Entry</h4>
@@ -112,28 +112,26 @@
                         <div id="add-categories-messages"></div>
 
                         <div class="form-group">
-                            <label for="categoriesStatus" class="col-sm-4 control-label">Entry Name: </label>
+                            <label for="categoriesStatusEdit" class="col-sm-4 control-label">Entry Name: </label>
                             <label class="col-sm-1 control-label">: </label>
                             <div class="col-sm-7">
-                                <select class="form-control" id="categoriesStatus" name="categoriesStatus">
+                                <select class="form-control" id="categoriesStatusEdit" name="categoriesStatusEdit">
                                     <option value="">~~SELECT~~</option>
-                                    <option value="1">.....</option>
-                                    <option value="2">.....</option>
                                 </select>
                             </div>
                         </div> <!-- /form-group-->
                         <div class="form-group">
-                            <label for="categoriesName" class="col-sm-4 control-label">Amount: </label>
+                            <label for="categoriesAmountEdit" class="col-sm-4 control-label">Amount: </label>
                             <label class="col-sm-1 control-label">: </label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" id="categoriesName" placeholder="" name="categoriesName" autocomplete="off">
+                                <input type="text" class="form-control" id="categoriesAmountEdit" placeholder="" name="categoriesAmountEdit" autocomplete="off">
                             </div>
                         </div> <!-- /form-group-->
                         <div class="form-group">
-                            <label for="startDate" class="col-sm-4 control-label">Entry Date: </label>
+                            <label for="startDateEdit" class="col-sm-4 control-label">Entry Date: </label>
                             <label class="col-sm-1 control-label">: </label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" id="startDate" name="startDate" placeholder="Entry Date" />
+                                <input type="text" class="form-control" id="startDateEdit" name="startDateEdit" placeholder="Entry Date" />
                             </div>
                         </div>
                         <!-- /edit brand result -->
@@ -143,7 +141,7 @@
                     <div class="modal-footer editCategoriesFooter">
                         <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
 
-                        <button type="submit" class="btn btn-success" id="editCategoriesBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+                        <button type="submit" class="btn btn-success" id="editCategoriesBtn" onclick="updateEntry()" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
                     </div>
                     <!-- /modal-footer -->
                 </form>
@@ -162,6 +160,7 @@
     var ids=0;
     $(document).ready(function() {
         var categoriesStatus = document.getElementById("categoriesStatus");
+        var categoriesStatusEdit = document.getElementById("categoriesStatusEdit");
         $.ajax({
             type: 'POST',
             url: 'php_action/fetchExpenseTypeOption.php',
@@ -187,31 +186,41 @@
                         categoriesStatus.add(option);
                     }
                 }
+                for (var key in datas) {
+                    if (datas.hasOwnProperty(key)) {
+                        var option = document.createElement("option");
+                        option.text = datas[key].Name;
+                        option.value=datas[key].id;
+                        categoriesStatusEdit.add(option);
+                    }
+                }
             }
         });
     });
-    function editExpenseType(id,entry,amount,date) {
+    function editEntry(id,entry,amount,date) {
         //alert(name);
         ids=id;
-        var editentryName = document.getElementById("editentryName");
-        var editentryType = document.getElementById("editentryType");
-        document.getElementById("editentryName").value=name;
-        document.getElementById("editentryType").value=type;
+        //alert(id+" "+entry+" "+amount+" "+date);
+        document.getElementById("categoriesStatusEdit").value=entry;
+        document.getElementById("categoriesAmountEdit").value=amount;
+        document.getElementById("startDateEdit").value=date;
         //getting airlines88
     }
-    function updateExpenceType()
+    function updateEntry()
     {
-        var name=document.getElementById("editentryName").value;
-        var type=document.getElementById("editentryType").value;
+        var categoriesStatusEdit=document.getElementById("categoriesStatusEdit").value;
+        var categoriesAmountEdit=document.getElementById("categoriesAmountEdit").value;
+        var startDateEdit=document.getElementById("startDateEdit").value;
         //alert(name);
         $.ajax({
             type: 'POST',
-            url: 'php_action/editExpenseType.php',
+            url: 'php_action/editEntry.php',
             async: false,
             data: {
                 id:ids,
-                Name: name,
-                Type:type
+                Entry: categoriesStatusEdit,
+                Amount:categoriesAmountEdit,
+                Date:startDateEdit
             },
             error: function (xhr, status) {
                 alert(status);
@@ -220,10 +229,11 @@
                 //when found names sending them in datalist for suggetions
 
                 alert("Successfully Updated");
+                window.open("Entry.php","_self");
             }
         });
     }
-    function removeExpenseType(id) {
+    function removeEntry(id) {
         //8alert(id);
         $.ajax({
             type: 'POST',
@@ -239,6 +249,7 @@
                 //when found names sending them in datalist for suggetions
 
                 alert("Successfully Deleted");
+                window.open("Entry.php","_self");
             }
         });
     }
@@ -247,4 +258,4 @@
 
 
 <?php require_once 'includes/footer.php'; ?>
-<script src="custom/js/report.js"></script>
+<script src="custom/js/entry.js"></script>
