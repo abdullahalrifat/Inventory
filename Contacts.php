@@ -21,7 +21,7 @@
                     <button class="btn btn-default button1" data-toggle="modal" id="addCategoriesModalBtn" data-target="#addCategoriesModal"> <i class="glyphicon glyphicon-plus-sign"></i> Add Contact </button>
                 </div> <!-- /div-action -->
 
-                <table class="table" id="manageCategoriesTable">
+                <table class="table" id="manageContactTable">
                     <thead>
                     <tr>
                         <th>Type</th>
@@ -34,7 +34,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php include "php_action/fetchEntry.php"?>
+                    <?php include "php_action/fetchContact.php"?>
                     </tbody>
                 </table>
                 <!-- /table -->
@@ -50,7 +50,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
 
-            <form class="form-horizontal" id="submitCategoriesForm" action="php_action/createEntry.php" method="POST">
+            <form class="form-horizontal" id="submitCategoriesForm" action="php_action/createContact.php" method="POST">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title"><i class="fa fa-plus"></i> Add Contact</h4>
@@ -60,50 +60,50 @@
                     <div id="add-categories-messages"></div>
 
                     <div class="form-group">
-                        <label for="categoriesStatus" class="col-sm-4 control-label">Contact Type: </label>
+                        <label for="type" class="col-sm-4 control-label">Contact Type: </label>
                         <label class="col-sm-1 control-label">: </label>
                         <div class="col-sm-7">
-                            <select class="form-control" id="" name="categoriesStatus">
-                                <option value="">~~SELECT~~</option>
-                                <option value=""> Supplier </option>
-                                <option value=""> Customer </option>
+                            <select class="form-control" id="type" name="type">
+                                <option value="-1">~~SELECT~~</option>
+                                <option value="1"> Supplier </option>
+                                <option value="2"> Customer </option>
 
                             </select>
                         </div>
                     </div> <!-- /form-group-->
                     <div class="form-group">
-                        <label for="entryAmount" class="col-sm-4 control-label">Name: </label>
+                        <label for="name" class="col-sm-4 control-label">Name: </label>
                         <label class="col-sm-1 control-label">: </label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="entryAmount" placeholder="" name="entryAmount" autocomplete="off">
+                            <input type="text" class="form-control" id="name" placeholder="" name="name" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="entryAmount" class="col-sm-4 control-label">Company: </label>
+                        <label for="company" class="col-sm-4 control-label">Company: </label>
                         <label class="col-sm-1 control-label">: </label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="entryAmount" placeholder="" name="entryAmount" autocomplete="off">
+                            <input type="text" class="form-control" id="company" placeholder="" name="company" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="entryAmount" class="col-sm-4 control-label">Mobile/phone: </label>
+                        <label for="mobile" class="col-sm-4 control-label">Mobile/phone: </label>
                         <label class="col-sm-1 control-label">: </label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="entryAmount" placeholder="" name="entryAmount" autocomplete="off">
+                            <input type="text" class="form-control" id="mobile" placeholder="" name="mobile" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="entryAmount" class="col-sm-4 control-label">Email: </label>
+                        <label for="email" class="col-sm-4 control-label">Email: </label>
                         <label class="col-sm-1 control-label">: </label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="entryAmount" placeholder="" name="entryAmount" autocomplete="off">
+                            <input type="text" class="form-control" id="email" placeholder="" name="email" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="entryAmount" class="col-sm-4 control-label">Address: </label>
+                        <label for="address" class="col-sm-4 control-label">Address: </label>
                         <label class="col-sm-1 control-label">: </label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="entryAmount" placeholder="" name="entryAmount" autocomplete="off">
+                            <input type="text" class="form-control" id="address" placeholder="" name="address" autocomplete="off">
                         </div>
                     </div><!-- /form-group-->
 
@@ -129,47 +129,67 @@
             <form class="form-horizontal" id="editCategoriesForm" method="POST">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Entry</h4>
+                    <h4 class="modal-title"><i class="fa fa-plus"></i> Add Contact</h4>
                 </div>
                 <div class="modal-body">
-
-                    <div id="edit-categories-messages"></div>
 
                     <div id="add-categories-messages"></div>
 
                     <div class="form-group">
-                        <label for="categoriesStatusEdit" class="col-sm-4 control-label">Entry Name: </label>
+                        <label for="edittype" class="col-sm-4 control-label">Contact Type: </label>
                         <label class="col-sm-1 control-label">: </label>
                         <div class="col-sm-7">
-                            <select class="form-control" id="categoriesStatusEdit" name="categoriesStatusEdit">
-                                <option value="">~~SELECT~~</option>
+                            <select class="form-control" id="edittype" name="edittype">
+                                <option value="-1">~~SELECT~~</option>
+                                <option value="1"> Supplier </option>
+                                <option value="2"> Customer </option>
+
                             </select>
                         </div>
                     </div> <!-- /form-group-->
                     <div class="form-group">
-                        <label for="categoriesAmountEdit" class="col-sm-4 control-label">Amount: </label>
+                        <label for="editname" class="col-sm-4 control-label">Name: </label>
                         <label class="col-sm-1 control-label">: </label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="categoriesAmountEdit" placeholder="" name="categoriesAmountEdit" autocomplete="off">
-                        </div>
-                    </div> <!-- /form-group-->
-                    <div class="form-group">
-                        <label for="startDateEdit" class="col-sm-4 control-label">Entry Date: </label>
-                        <label class="col-sm-1 control-label">: </label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="startDateEdit" name="startDateEdit" placeholder="Entry Date" />
+                            <input type="text" class="form-control" id="editname" placeholder="" name="editname" autocomplete="off">
                         </div>
                     </div>
-                    <!-- /edit brand result -->
+                    <div class="form-group">
+                        <label for="editcompany" class="col-sm-4 control-label">Company: </label>
+                        <label class="col-sm-1 control-label">: </label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="editcompany" placeholder="" name="editcompany" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editmobile" class="col-sm-4 control-label">Mobile/phone: </label>
+                        <label class="col-sm-1 control-label">: </label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="editmobile" placeholder="" name="editmobile" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editemail" class="col-sm-4 control-label">Email: </label>
+                        <label class="col-sm-1 control-label">: </label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="editemail" placeholder="" name="editemail" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editaddress" class="col-sm-4 control-label">Address: </label>
+                        <label class="col-sm-1 control-label">: </label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="editaddress" placeholder="" name="editaddress" autocomplete="off">
+                        </div>
+                    </div><!-- /form-group-->
 
                 </div> <!-- /modal-body -->
 
-                <div class="modal-footer editCategoriesFooter">
+                <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
 
-                    <button type="submit" class="btn btn-success" id="editCategoriesBtn" onclick="updateEntry()" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
-                </div>
-                <!-- /modal-footer -->
+                    <button type="submit" class="btn btn-primary" id="createCategoriesBtn" data-loading-text="Loading..." onclick="updateContact()" autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+                </div> <!-- /modal-footer -->
             </form>
             <!-- /.form -->
         </div>
@@ -184,69 +204,40 @@
 <!-- /categories brand -->
 <script>
     var ids=0;
-    $(document).ready(function() {
-        var categoriesStatus = document.getElementById("categoriesStatus");
-        var categoriesStatusEdit = document.getElementById("categoriesStatusEdit");
-        $.ajax({
-            type: 'POST',
-            url: 'php_action/fetchExpenseTypeOption.php',
-            async: false,
-            data: {
-            },
-            error: function (xhr, status) {
-                alert(status);
-            },
-            success: function (data) {
-                //when found names sending them in datalist for suggetion
-                // alert(data);
 
-
-                var obj = JSON.parse(data);
-
-                var datas=obj.expense;
-                for (var key in datas) {
-                    if (datas.hasOwnProperty(key)) {
-                        var option = document.createElement("option");
-                        option.text = datas[key].Name;
-                        option.value=datas[key].id;
-                        categoriesStatus.add(option);
-                    }
-                }
-                for (var key in datas) {
-                    if (datas.hasOwnProperty(key)) {
-                        var option = document.createElement("option");
-                        option.text = datas[key].Name;
-                        option.value=datas[key].id;
-                        categoriesStatusEdit.add(option);
-                    }
-                }
-            }
-        });
-    });
-    function editEntry(id,entry,amount,date) {
+    function editContact(id,type,name,company,mobile,email,address) {
         //alert(name);
         ids=id;
         //alert(id+" "+entry+" "+amount+" "+date);
-        document.getElementById("categoriesStatusEdit").value=entry;
-        document.getElementById("categoriesAmountEdit").value=amount;
-        document.getElementById("startDateEdit").value=date;
+        document.getElementById("edittype").value=type;
+        document.getElementById("editname").value=name;
+        document.getElementById("editcompany").value=company;
+        document.getElementById("editmobile").value=mobile;
+        document.getElementById("editemail").value=email;
+        document.getElementById("editaddress").value=address;
         //getting airlines88
     }
-    function updateEntry()
+    function updateContact()
     {
-        var categoriesStatusEdit=document.getElementById("categoriesStatusEdit").value;
-        var categoriesAmountEdit=document.getElementById("categoriesAmountEdit").value;
-        var startDateEdit=document.getElementById("startDateEdit").value;
+        var type=document.getElementById("edittype").value;
+        var name=document.getElementById("editname").value;
+        var company=document.getElementById("editcompany").value;
+        var mobile=document.getElementById("editmobile").value;
+        var email=document.getElementById("editemail").value;
+        var address=document.getElementById("editaddress").value;
         //alert(name);
         $.ajax({
             type: 'POST',
-            url: 'php_action/editEntry.php',
+            url: 'php_action/editContact.php',
             async: false,
             data: {
                 id:ids,
-                Entry: categoriesStatusEdit,
-                Amount:categoriesAmountEdit,
-                Date:startDateEdit
+                type: type,
+                name:name,
+                company:company,
+                mobile:mobile,
+                email:email,
+                address:address
             },
             error: function (xhr, status) {
                 alert(status);
@@ -255,29 +246,38 @@
                 //when found names sending them in datalist for suggetions
 
                 alert("Successfully Updated");
-                window.open("Entry.php","_self");
+                window.open("Contacts.php","_self");
             }
         });
     }
-    function removeEntry(id) {
-        //8alert(id);
-        $.ajax({
-            type: 'POST',
-            url: 'php_action/removeEntry.php',
-            async: false,
-            data: {
-                id:id
-            },
-            error: function (xhr, status) {
-                alert(status);
-            },
-            success: function (data) {
-                //when found names sending them in datalist for suggetions
+    function removeContact(t,id) {
+        var rowNumber=$(t).closest('tr').index();
+        var x = document.getElementById("manageContactTable").rows[rowNumber+1].cells;
+        var ContactName=x[1].innerHTML;
+        var r = confirm("Are You Sure To Delete "+ContactName);
+        if (r == true) {
+            $.ajax({
+                type: 'POST',
+                url: 'php_action/removeContact.php',
+                async: false,
+                data: {
+                    id:id
+                },
+                error: function (xhr, status) {
+                    alert(status);
+                },
+                success: function (data) {
+                    //when found names sending them in datalist for suggetions
 
-                alert("Successfully Deleted");
-                window.open("Entry.php","_self");
-            }
-        });
+                    alert("Successfully Deleted");
+                    window.open("Contacts.php","_self");
+                }
+            });
+        } else {
+
+        }
+        //8alert(id);
+
     }
 
 </script>

@@ -44,7 +44,22 @@ INSERT INTO `ExpenceType` (`id`, `Name`, `Type`) VALUES
 (5, 'b', '1');
 
 -- --------------------------------------------------------
+--
+-- Table structure for table `Contact`
+--
 
+CREATE TABLE `contact` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Type` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `Company` varchar(255) NOT NULL,
+  `Mobile` varchar(255) NOT NULL,
+  `Email` varchar(255) NOT NULL,
+  `Address` varchar(255) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='';
+
+-- --------------------------------------------------------
 --
 -- Table structure for table `Accounting`
 --

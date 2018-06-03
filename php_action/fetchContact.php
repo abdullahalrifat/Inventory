@@ -2,8 +2,7 @@
 
 require_once 'core.php';
 
-$sql = "SELECT accounting.id, expencetype.Name, expencetype.Type,Amount,Date,expencetype.id
-FROM accounting,expencetype where accounting.Entry=expencetype.id";
+$sql = "SELECT * FROM contact";
 $result = $connect->query($sql);
 
 $output = array('data' => array());
@@ -15,26 +14,40 @@ if($result->num_rows > 0) {
 
     while($row = $result->fetch_array()) {
         echo "<tr>";
-        echo "<td>";
-        echo $row[1];
-        echo "</td>";
+
         // active
-        if($row[2] == 1) {
+        if($row[1] == 1) {
             // activate member
             echo "<td>";
-            echo "Debit";
+            echo "Supplier";
             echo "</td>";
 
         } else {
             // deactivate member
             echo "<td>";
-            echo "Credit";
+            echo "Customer";
             echo "</td>";
 
         }
 
         echo "<td>";
+        echo $row[2];
+        echo "</td>";
+
+        echo "<td>";
         echo $row[3];
+        echo "</td>";
+
+        echo "<td>";
+        echo $row[4];
+        echo "</td>";
+
+        echo "<td>";
+        echo $row[5];
+        echo "</td>";
+
+        echo "<td>";
+        echo $row[6];
         echo "</td>";
 
 
@@ -46,8 +59,8 @@ if($result->num_rows > 0) {
 	    Action <span class=\"caret\"></span>
 	  </button>";
         echo "<ul class=\"dropdown-menu\">
-	    <li><a type=\"button\" data-toggle=\"modal\" id=\"editCategoriesModalBtn\" data-target=\"#editCategoriesModal\" onclick=\"editEntry('$row[0]','$row[5]','$row[3]','$row[4]')\"> <i class=\"glyphicon glyphicon-edit\"></i> Edit</a></li>
-	    <li><a type=\"button\" data-toggle=\"modal\" data-target=\"#removeCategoriesModal\" id=\"removeCategoriesModalBtn\" onclick=\"removeEntry(this,'$row[0]')\"> <i class=\"glyphicon glyphicon-trash\"></i> Remove</a></li>       
+	    <li><a type=\"button\" data-toggle=\"modal\" id=\"editCategoriesModalBtn\" data-target=\"#editCategoriesModal\" onclick=\"editContact('$row[0]','$row[1]','$row[2]','$row[3]','$row[4]','$row[5]','$row[6]')\"> <i class=\"glyphicon glyphicon-edit\"></i> Edit</a></li>
+	    <li><a type=\"button\" data-toggle=\"modal\" data-target=\"#removeCategoriesModal\" id=\"removeCategoriesModalBtn\" onclick=\"removeContact(this,'$row[0]')\"> <i class=\"glyphicon glyphicon-trash\"></i> Remove</a></li>       
 	  </ul>";
         echo "</div>";
         echo "</td>";

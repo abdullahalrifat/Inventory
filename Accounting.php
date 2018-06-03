@@ -22,7 +22,7 @@
                         <button class="btn btn-default button1" data-toggle="modal" id="addCategoriesModalBtn" data-target="#addCategoriesModal"> <i class="glyphicon glyphicon-plus-sign"></i> Add Entry </button>
                     </div> <!-- /div-action -->
 
-                    <table class="table" id="manageCategoriesTable">
+                    <table class="table" id="manageAccountingTable">
                         <thead>
                         <tr>
                             <th>Entry Name</th>
@@ -177,25 +177,36 @@
             }
         });
     }
-    function removeExpenseType(id) {
+    function removeExpenseType(t,id) {
        //8alert(id);
-        $.ajax({
-            type: 'POST',
-            url: 'php_action/removeExpenseType.php',
-            async: false,
-            data: {
-                id:id
-            },
-            error: function (xhr, status) {
-                alert(status);
-            },
-            success: function (data) {
-                //when found names sending them in datalist for suggetions
 
-                alert("Successfully Deleted");
-                window.open("Accounting.php","_self");
-            }
-        });
+        var rowNumber=$(t).closest('tr').index();
+        var x = document.getElementById("manageAccountingTable").rows[rowNumber+1].cells;
+        var EntryName=x[0].innerHTML;
+        var EntryType=x[1].innerHTML;
+
+        var r = confirm("Are You Sure To Delete "+EntryName+" Which is "+EntryType+"?");
+        if (r == true) {
+            $.ajax({
+                type: 'POST',
+                url: 'php_action/removeExpenseType.php',
+                async: false,
+                data: {
+                    id:id
+                },
+                error: function (xhr, status) {
+                    alert(status);
+                },
+                success: function (data) {
+                    //when found names sending them in datalist for suggetions
+
+                    alert("Successfully Deleted");
+                    window.open("Accounting.php","_self");
+                }
+            });
+        } else {
+
+        }
     }
 
 </script>
