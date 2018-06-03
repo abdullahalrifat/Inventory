@@ -5,7 +5,7 @@
 require_once 'core.php';
 
 $sql = "SELECT product.product_id, product.product_name, product.product_image, product.brand_id,
- 		product.categories_id, product.quantity, product.rate, product.active, product.status, 
+ 		product.categories_id, product.quantity, product.purchaseRate,product.sellingRate, product.active, product.status, 
  		brands.brand_name, categories.categories_name FROM product 
 		INNER JOIN brands ON product.brand_id = brands.brand_id 
 		INNER JOIN categories ON product.categories_id = categories.categories_id  
@@ -23,7 +23,7 @@ if($result->num_rows > 0) {
  while($row = $result->fetch_array()) {
  	$productId = $row[0];
  	// active 
- 	if($row[7] == 1) {
+ 	if($row[8] == 1) {
  		// activate member
  		$active = "<label class='label label-success'>Available</label>";
  	} else {
@@ -61,8 +61,8 @@ if($result->num_rows > 0) {
  		$productImage,
  		// product name
  		$row[1], 
- 		// rate
- 		$row[6],
+ 		// selling rate
+ 		$row[7],
  		// quantity 
  		$row[5], 		 	
  		// brand

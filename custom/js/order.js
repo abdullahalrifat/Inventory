@@ -486,12 +486,12 @@ function getProductData(row = null) {
 				success:function(response) {
 					// setting the rate value into the rate input field
 					
-					$("#rate"+row).val(response.rate);
-					$("#rateValue"+row).val(response.rate);
+					$("#rate"+row).val(response.sellingRate);
+					$("#rateValue"+row).val(response.sellingRate);
 
 					$("#quantity"+row).val(1);
 
-					var total = Number(response.rate) * 1;
+					var total = Number(response.sellingRate) * 1;
 					total = total.toFixed(2);
 					$("#total"+row).val(total);
 					$("#totalValue"+row).val(total);

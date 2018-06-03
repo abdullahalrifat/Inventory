@@ -96,17 +96,17 @@ if(isset($_GET["from"]))
                         </div> <!-- /form-group-->
 
                         <div class="form-group">
-                            <label for="editRate" class="col-sm-3 control-label">Purchase Price: </label>
+                            <label for="purchaseRate" class="col-sm-3 control-label">Purchase Price: </label>
                             <label class="col-sm-1 control-label">: </label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="editRate" placeholder="Rate" name="editRate" autocomplete="off">
+                                <input type="text" class="form-control" id="purchaseRate" placeholder="Purchase Rate" name="purchaseRate" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="editRate" class="col-sm-3 control-label">Selling Price: </label>
+                            <label for="sellingRate" class="col-sm-3 control-label">Selling Price: </label>
                             <label class="col-sm-1 control-label">: </label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="editRate" placeholder="Rate" name="editRate" autocomplete="off">
+                                <input type="text" class="form-control" id="sellingRate" placeholder="Selling Rate" name="sellingRate" autocomplete="off">
                             </div>
                         </div> <!-- /form-group-->
 
@@ -261,17 +261,17 @@ if(isset($_GET["from"]))
                                     </div> <!-- /form-group-->
 
                                     <div class="form-group">
-                                        <label for="editRate" class="col-sm-3 control-label">Purchase Price: </label>
+                                        <label for="editPurchaseRate" class="col-sm-3 control-label">Purchase Price: </label>
                                         <label class="col-sm-1 control-label">: </label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="editRate" placeholder="Rate" name="editRate" autocomplete="off">
+                                            <input type="text" class="form-control" id="editPurchaseRate" placeholder="Rate" name="editPurchaseRate" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="editRate" class="col-sm-3 control-label">Selling Price: </label>
+                                        <label for="editSellingRate" class="col-sm-3 control-label">Selling Price: </label>
                                         <label class="col-sm-1 control-label">: </label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="editRate" placeholder="Rate" name="editRate" autocomplete="off">
+                                            <input type="text" class="form-control" id="editSellingRate" placeholder="Rate" name="editSellingRate" autocomplete="off">
                                         </div>
                                     </div><!-- /form-group-->
 

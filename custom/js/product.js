@@ -1,185 +1,198 @@
 var manageProductTable;
 
 $(document).ready(function() {
-	// top nav bar 
-	$('#navProduct').addClass('active');
-	// manage product data table
-	manageProductTable = $('#manageProductTable').DataTable({
-		'ajax': 'php_action/fetchProduct.php',
-		'order': []
-	});
+    // top nav bar
+    $('#navProduct').addClass('active');
+    // manage product data table
+    manageProductTable = $('#manageProductTable').DataTable({
+        'ajax': 'php_action/fetchProduct.php',
+        'order': []
+    });
 
-	// add product modal btn clicked
-	$("#addProductModalBtn").unbind('click').bind('click', function() {
-		// // product form reset
-		$("#submitProductForm")[0].reset();		
+    // add product modal btn clicked
+    $("#addProductModalBtn").unbind('click').bind('click', function() {
+        // // product form reset
+        $("#submitProductForm")[0].reset();
 
-		// remove text-error 
-		$(".text-danger").remove();
-		// remove from-group error
-		$(".form-group").removeClass('has-error').removeClass('has-success');
+        // remove text-error
+        $(".text-danger").remove();
+        // remove from-group error
+        $(".form-group").removeClass('has-error').removeClass('has-success');
 
-		$("#productImage").fileinput({
-	      overwriteInitial: true,
-		    maxFileSize: 2500,
-		    showClose: false,
-		    showCaption: false,
-		    browseLabel: '',
-		    removeLabel: '',
-		    browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
-		    removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-		    removeTitle: 'Cancel or reset changes',
-		    elErrorContainer: '#kv-avatar-errors-1',
-		    msgErrorClass: 'alert alert-block alert-danger',
-		    defaultPreviewContent: '<img src="assests/images/photo_default.png" alt="Profile Image" style="width:100%;">',
-		    layoutTemplates: {main2: '{preview} {remove} {browse}'},								    
-	  		allowedFileExtensions: ["jpg", "png", "gif", "JPG", "PNG", "GIF"]
-			});   
+        $("#productImage").fileinput({
+            overwriteInitial: true,
+            maxFileSize: 2500,
+            showClose: false,
+            showCaption: false,
+            browseLabel: '',
+            removeLabel: '',
+            browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+            removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+            removeTitle: 'Cancel or reset changes',
+            elErrorContainer: '#kv-avatar-errors-1',
+            msgErrorClass: 'alert alert-block alert-danger',
+            defaultPreviewContent: '<img src="assests/images/photo_default.png" alt="Profile Image" style="width:100%;">',
+            layoutTemplates: {main2: '{preview} {remove} {browse}'},
+            allowedFileExtensions: ["jpg", "png", "gif", "JPG", "PNG", "GIF"]
+        });
 
-		// submit product form
-		$("#submitProductForm").unbind('submit').bind('submit', function() {
+        // submit product form
+        $("#submitProductForm").unbind('submit').bind('submit', function() {
 
-			// form validation
-			var productImage = $("#productImage").val();
-			var productName = $("#productName").val();
-			var quantity = $("#quantity").val();
-			var rate = $("#rate").val();
-			var brandName = $("#brandName").val();
-			var categoryName = $("#categoryName").val();
-			var productStatus = $("#productStatus").val();
-	
-			if(productImage == "") {
-				$("#productImage").closest('.center-block').after('<p class="text-danger">Product Image field is required</p>');
-				$('#productImage').closest('.form-group').addClass('has-error');
-			}	else {
-				// remov error text field
-				$("#productImage").find('.text-danger').remove();
-				// success out for form 
-				$("#productImage").closest('.form-group').addClass('has-success');	  	
-			}	// /else
+            // form validation
+            var productImage = $("#productImage").val();
+            var productName = $("#productName").val();
+            var quantity = $("#quantity").val();
+            var purchaseRate = $("#purchaseRate").val();
+            var sellingRate = $("#sellingRate").val();
+            var brandName = $("#brandName").val();
+            var categoryName = $("#categoryName").val();
+            var productStatus = $("#productStatus").val();
 
-			if(productName == "") {
-				$("#productName").after('<p class="text-danger">Product Name field is required</p>');
-				$('#productName').closest('.form-group').addClass('has-error');
-			}	else {
-				// remov error text field
-				$("#productName").find('.text-danger').remove();
-				// success out for form 
-				$("#productName").closest('.form-group').addClass('has-success');	  	
-			}	// /else
+            if(productImage == "") {
+                $("#productImage").closest('.center-block').after('<p class="text-danger">Product Image field is required</p>');
+                $('#productImage').closest('.form-group').addClass('has-error');
+            }	else {
+                // remov error text field
+                $("#productImage").find('.text-danger').remove();
+                // success out for form
+                $("#productImage").closest('.form-group').addClass('has-success');
+            }	// /else
 
-			if(quantity == "") {
-				$("#quantity").after('<p class="text-danger">Quantity field is required</p>');
-				$('#quantity').closest('.form-group').addClass('has-error');
-			}	else {
-				// remov error text field
-				$("#quantity").find('.text-danger').remove();
-				// success out for form 
-				$("#quantity").closest('.form-group').addClass('has-success');	  	
-			}	// /else
+            if(productName == "") {
+                $("#productName").after('<p class="text-danger">Product Name field is required</p>');
+                $('#productName').closest('.form-group').addClass('has-error');
+            }	else {
+                // remov error text field
+                $("#productName").find('.text-danger').remove();
+                // success out for form
+                $("#productName").closest('.form-group').addClass('has-success');
+            }	// /else
 
-			if(rate == "") {
-				$("#rate").after('<p class="text-danger">Rate field is required</p>');
-				$('#rate').closest('.form-group').addClass('has-error');
-			}	else {
-				// remov error text field
-				$("#rate").find('.text-danger').remove();
-				// success out for form 
-				$("#rate").closest('.form-group').addClass('has-success');	  	
-			}	// /else
+            if(quantity == "") {
+                $("#quantity").after('<p class="text-danger">Quantity field is required</p>');
+                $('#quantity').closest('.form-group').addClass('has-error');
+            }	else {
+                // remov error text field
+                $("#quantity").find('.text-danger').remove();
+                // success out for form
+                $("#quantity").closest('.form-group').addClass('has-success');
+            }	// /else
 
-			if(brandName == "") {
-				$("#brandName").after('<p class="text-danger">Brand Name field is required</p>');
-				$('#brandName').closest('.form-group').addClass('has-error');
-			}	else {
-				// remov error text field
-				$("#brandName").find('.text-danger').remove();
-				// success out for form 
-				$("#brandName").closest('.form-group').addClass('has-success');	  	
-			}	// /else
+            if(purchaseRate == "") {
+                $("#purchaseRate").after('<p class="text-danger">Rate field is required</p>');
+                $('#purchaseRate').closest('.form-group').addClass('has-error');
+            }	else {
+                // remov error text field
+                $("#purchaseRate").find('.text-danger').remove();
+                // success out for form
+                $("#purchaseRate").closest('.form-group').addClass('has-success');
+            }	// /else
 
-			if(categoryName == "") {
-				$("#categoryName").after('<p class="text-danger">Category Name field is required</p>');
-				$('#categoryName').closest('.form-group').addClass('has-error');
-			}	else {
-				// remov error text field
-				$("#categoryName").find('.text-danger').remove();
-				// success out for form 
-				$("#categoryName").closest('.form-group').addClass('has-success');	  	
-			}	// /else
+            if(sellingRate == "") {
+                $("#sellingRate").after('<p class="text-danger">Rate field is required</p>');
+                $('#sellingRate').closest('.form-group').addClass('has-error');
+            }	else {
+                // remov error text field
+                $("#sellingRate").find('.text-danger').remove();
+                // success out for form
+                $("#sellingRate").closest('.form-group').addClass('has-success');
+            }	// /else
 
-			if(productStatus == "") {
-				$("#productStatus").after('<p class="text-danger">Product Status field is required</p>');
-				$('#productStatus').closest('.form-group').addClass('has-error');
-			}	else {
-				// remov error text field
-				$("#productStatus").find('.text-danger').remove();
-				// success out for form 
-				$("#productStatus").closest('.form-group').addClass('has-success');	  	
-			}	// /else
+            if(brandName == "") {
+                $("#brandName").after('<p class="text-danger">Brand Name field is required</p>');
+                $('#brandName').closest('.form-group').addClass('has-error');
+            }	else {
+                // remov error text field
+                $("#brandName").find('.text-danger').remove();
+                // success out for form
+                $("#brandName").closest('.form-group').addClass('has-success');
+            }	// /else
 
-			if(productImage && productName && quantity && rate && brandName && categoryName && productStatus) {
-				// submit loading button
-				$("#createProductBtn").button('loading');
+            if(categoryName == "") {
+                $("#categoryName").after('<p class="text-danger">Category Name field is required</p>');
+                $('#categoryName').closest('.form-group').addClass('has-error');
+            }	else {
+                // remov error text field
+                $("#categoryName").find('.text-danger').remove();
+                // success out for form
+                $("#categoryName").closest('.form-group').addClass('has-success');
+            }	// /else
 
-				var form = $(this);
-				var formData = new FormData(this);
+            if(productStatus == "") {
+                $("#productStatus").after('<p class="text-danger">Product Status field is required</p>');
+                $('#productStatus').closest('.form-group').addClass('has-error');
+            }	else {
+                // remov error text field
+                $("#productStatus").find('.text-danger').remove();
+                // success out for form
+                $("#productStatus").closest('.form-group').addClass('has-success');
+            }	// /else
 
-				$.ajax({
-					url : form.attr('action'),
-					type: form.attr('method'),
-					data: formData,
-					dataType: 'json',
-					cache: false,
-					contentType: false,
-					processData: false,
-					success:function(response) {
+            if(productImage && productName && quantity && purchaseRate && sellingRate && brandName && categoryName && productStatus) {
+                // submit loading button
+                $("#createProductBtn").button('loading');
 
-						if(response.success == true) {
-							// submit loading button
-							$("#createProductBtn").button('reset');
-							
-							$("#submitProductForm")[0].reset();
+                var form = $(this);
+                var formData = new FormData(this);
+				//alert(formData);
+                $.ajax({
+                    url : form.attr('action'),
+                    type: form.attr('method'),
+                    data: formData,
+                    dataType: 'json',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    error: function (xhr, status) {
+                        alert(status);
+                    },
+                    success:function(response) {
+						//alert(response);
+                        if(response.success == true) {
+                            // submit loading button
+                            $("#createProductBtn").button('reset');
 
-							$("html, body, div.modal, div.modal-content, div.modal-body").animate({scrollTop: '0'}, 100);
-																	
-							// shows a successful message after operation
-							$('#add-product-messages').html('<div class="alert alert-success">'+
-		            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-		            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
-		          '</div>');
+                            $("#submitProductForm")[0].reset();
 
-							// remove the mesages
-		          $(".alert-success").delay(500).show(10, function() {
-								$(this).delay(3000).hide(10, function() {
-									$(this).remove();
-								});
-							}); // /.alert
+                            $("html, body, div.modal, div.modal-content, div.modal-body").animate({scrollTop: '0'}, 100);
 
-		          // reload the manage student table
-							manageProductTable.ajax.reload(null, true);
+                            // shows a successful message after operation
+                            $('#add-product-messages').html('<div class="alert alert-success">'+
+                                '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+                                '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+                                '</div>');
 
-							// remove text-error 
-							$(".text-danger").remove();
-							// remove from-group error
-							$(".form-group").removeClass('has-error').removeClass('has-success');
+                            // remove the mesages
+                            $(".alert-success").delay(500).show(10, function() {
+                                $(this).delay(3000).hide(10, function() {
+                                    $(this).remove();
+                                });
+                            }); // /.alert
 
-						} // /if response.success
-						
-					} // /success function
-				}); // /ajax function
-			}	 // /if validation is ok 					
+                            // reload the manage student table
+                            manageProductTable.ajax.reload(null, true);
 
-			return false;
-		}); // /submit product form
+                            // remove text-error
+                            $(".text-danger").remove();
+                            // remove from-group error
+                            $(".form-group").removeClass('has-error').removeClass('has-success');
 
-	}); // /add product modal btn clicked
-	
+                        } // /if response.success
 
-	// remove product 	
+                    } // /success function
+                }); // /ajax function
+            }	 // /if validation is ok
+
+            return false;
+        }); // /submit product form
+
+    }); // /add product modal btn clicked
+
+
+    // remove product
 
 }); // document.ready fucntion
-
 function editProduct(productId = null) {
 
 	if(productId) {
@@ -236,7 +249,9 @@ function editProduct(productId = null) {
 				// quantity
 				$("#editQuantity").val(response.quantity);
 				// rate
-				$("#editRate").val(response.rate);
+				$("#editPurchaseRate").val(response.purchaseRate);
+                // rate
+                $("#editSellingRate").val(response.sellingRate);
 				// brand name
 				$("#editBrandName").val(response.brand_id);
 				// category name
@@ -251,7 +266,8 @@ function editProduct(productId = null) {
 					var productImage = $("#editProductImage").val();
 					var productName = $("#editProductName").val();
 					var quantity = $("#editQuantity").val();
-					var rate = $("#editRate").val();
+					var editPurchaseRate = $("#editPurchaseRate").val();
+                    var editSellingRate = $("#editSellingRate").val();
 					var brandName = $("#editBrandName").val();
 					var categoryName = $("#editCategoryName").val();
 					var productStatus = $("#editProductStatus").val();
@@ -277,17 +293,27 @@ function editProduct(productId = null) {
 						$("#editQuantity").closest('.form-group').addClass('has-success');	  	
 					}	// /else
 
-					if(rate == "") {
-						$("#editRate").after('<p class="text-danger">Rate field is required</p>');
-						$('#editRate').closest('.form-group').addClass('has-error');
+					if(editPurchaseRate == "") {
+						$("#editPurchaseRate").after('<p class="text-danger">Rate field is required</p>');
+						$('#editPurchaseRate').closest('.form-group').addClass('has-error');
 					}	else {
 						// remov error text field
-						$("#editRate").find('.text-danger').remove();
+						$("#editPurchaseRate").find('.text-danger').remove();
 						// success out for form 
-						$("#editRate").closest('.form-group').addClass('has-success');	  	
+						$("#editPurchaseRate").closest('.form-group').addClass('has-success');
 					}	// /else
 
-					if(brandName == "") {
+                    if(editSellingRate == "") {
+                        $("#editSellingRate").after('<p class="text-danger">Rate field is required</p>');
+                        $('#editSellingRate').closest('.form-group').addClass('has-error');
+                    }	else {
+                        // remov error text field
+                        $("#editSellingRate").find('.text-danger').remove();
+                        // success out for form
+                        $("#editSellingRate").closest('.form-group').addClass('has-success');
+                    }	// /else
+
+                    if(brandName == "") {
 						$("#editBrandName").after('<p class="text-danger">Brand Name field is required</p>');
 						$('#editBrandName').closest('.form-group').addClass('has-error');
 					}	else {
@@ -317,7 +343,7 @@ function editProduct(productId = null) {
 						$("#editProductStatus").closest('.form-group').addClass('has-success');	  	
 					}	// /else					
 
-					if(productName && quantity && rate && brandName && categoryName && productStatus) {
+					if(productName && quantity && editPurchaseRate&& editSellingRate && brandName && categoryName && productStatus) {
 						// submit loading button
 						$("#editProductBtn").button('loading');
 

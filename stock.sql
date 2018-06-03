@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `ExpenceType`
 --
 
-CREATE TABLE `ExpenceType` (
+CREATE TABLE `expencetype` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) NOT NULL,
   `Type` varchar(255) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `ExpenceType` (
 -- Dumping data for table `ExpenceType`
 --
 
-INSERT INTO `ExpenceType` (`id`, `Name`, `Type`) VALUES
+INSERT INTO `expencetype` (`id`, `Name`, `Type`) VALUES
 (4, 'Salary', '2'),
 (5, 'b', '1');
 
@@ -64,13 +64,13 @@ CREATE TABLE `contact` (
 -- Table structure for table `Accounting`
 --
 
-CREATE TABLE `Accounting` (
+CREATE TABLE `accounting` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Entry` int(11) NOT NULL,
   `Amount` double NOT NULL,
   `Date` date NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (Entry) REFERENCES ExpenceType(id)
+  FOREIGN KEY (Entry) REFERENCES expencetype(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='';
 
 -- --------------------------------------------------------
@@ -260,7 +260,8 @@ CREATE TABLE `product` (
   `brand_id` int(11) NOT NULL,
   `categories_id` int(11) NOT NULL,
   `quantity` varchar(255) NOT NULL,
-  `rate` varchar(255) NOT NULL,
+  `purchaseRate` varchar(255) NOT NULL,
+  `sellingRate` varchar(255) NOT NULL,
   `active` int(11) NOT NULL DEFAULT '0',
   `status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -269,17 +270,17 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`product_id`, `product_name`, `product_image`, `brand_id`, `categories_id`, `quantity`, `rate`, `active`, `status`) VALUES
-(1, 'Half pant', '../assests/images/stock/2847957892502c7200.jpg', 1, 2, '19', '1500', 2, 2),
-(2, 'T-Shirt', '../assests/images/stock/163965789252551575.jpg', 2, 2, '9', '1200', 2, 2),
-(3, 'Half Pant', '../assests/images/stock/13274578927924974b.jpg', 5, 3, '18', '1200', 2, 2),
-(4, 'T-Shirt', '../assests/images/stock/12299578927ace94c5.jpg', 6, 3, '29', '1000', 2, 2),
-(5, 'Half Pant', '../assests/images/stock/24937578929c13532e.jpg', 8, 5, '17', '1200', 2, 2),
-(6, 'Polo T-Shirt', '../assests/images/stock/10222578929f733dbf.jpg', 9, 5, '29', '1200', 2, 2),
-(7, 'Half Pant', '../assests/images/stock/1770257893463579bf.jpg', 11, 7, '16', '1200', 2, 2),
-(8, 'Polo T-shirt', '../assests/images/stock/136715789347d1aea6.jpg', 12, 7, '9', '1200', 2, 2),
-(9, 'Zenbook', '../assests/images/stock/3846488395acfa030ca0e4.png', 14, 9, '7', '42300', 2, 2),
-(10, 'asus', '../assests/images/stock/3801956495ada29211b29b.jpg', 16, 10, '89', '1000', 1, 1);
+INSERT INTO `product` (`product_id`, `product_name`, `product_image`, `brand_id`, `categories_id`, `quantity`, `purchaseRate`, `sellingRate`,`active`, `status`) VALUES
+(1, 'Half pant', '../assests/images/stock/2847957892502c7200.jpg', 1, 2, '19', '1500','1700', 2, 2),
+(2, 'T-Shirt', '../assests/images/stock/163965789252551575.jpg', 2, 2, '9', '1200','1500', 2, 2),
+(3, 'Half Pant', '../assests/images/stock/13274578927924974b.jpg', 5, 3, '18', '1200','1500', 2, 2),
+(4, 'T-Shirt', '../assests/images/stock/12299578927ace94c5.jpg', 6, 3, '29', '1000','1300', 2, 2),
+(5, 'Half Pant', '../assests/images/stock/24937578929c13532e.jpg', 8, 5, '17', '1200','1500', 2, 2),
+(6, 'Polo T-Shirt', '../assests/images/stock/10222578929f733dbf.jpg', 9, 5, '29', '1200','1500', 2, 2),
+(7, 'Half Pant', '../assests/images/stock/1770257893463579bf.jpg', 11, 7, '16', '1200','1500', 2, 2),
+(8, 'Polo T-shirt', '../assests/images/stock/136715789347d1aea6.jpg', 12, 7, '9', '1200','1500', 2, 2),
+(9, 'Zenbook', '../assests/images/stock/3846488395acfa030ca0e4.png', 14, 9, '7', '42300','45000', 2, 2),
+(10, 'asus', '../assests/images/stock/3801956495ada29211b29b.jpg', 16, 10, '89', '1000','1500', 1, 1);
 
 -- --------------------------------------------------------
 
