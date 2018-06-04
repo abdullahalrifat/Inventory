@@ -72,8 +72,9 @@ if($_GET['o'] == 'add') {
 			  <div class="form-group">
 			    <label for="clientName" class="col-sm-2 control-label">Client Name</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="clientName" name="clientName" placeholder="Client Name" autocomplete="off" />
-			    </div>
+                    <select onchange="myFunction()" name="clientName" id="clientName" class="form-control">
+                    </select>
+			      </div>
 			  </div> <!--/form-group-->
 			  <div class="form-group">
 			    <label for="clientContact" class="col-sm-2 control-label">Client Contact</label>
@@ -573,6 +574,48 @@ if($_GET['o'] == 'add') {
         }
         document.getElementById('radio1').checked=false;
     }
+    function myFunction()
+    {
+        var x = document.getElementById("clientName");
+        document.getElementById("clientContact").value = x.value;
+    }
+
+    $(document).ready(function() {
+
+        var clientName = document.getElementById("clientName");
+        var option = document.createElement("option");
+        option.text = "~~SELECT~~";
+        option.value=-1;
+        clientName.add(option);
+        $.ajax({
+            type: 'POST',
+            url: 'php_action/fetchCustomerContact.php',
+            async:false,
+            data: {
+            },
+            error: function (xhr, status) {
+                alert(status);
+            },
+            success: function(data) {
+                //when found names sending them in datalist for suggetions
+                //alert(data);
+                var obj = JSON.parse(data);
+
+                var datas=obj.data;
+                //alert(datas);
+                var options = '';
+                for (var key in datas) {
+                    //alert(key);
+                        var option = document.createElement("option");
+                        option.text = datas[key].name;
+                        option.value=datas[key].phone;
+                        clientName.add(option);
+
+                }
+            }
+        });
+
+    });
 
 </script>
 <script src="custom/js/order.js"></script>
