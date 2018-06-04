@@ -164,6 +164,9 @@ if($_GET['o'] == 'add') {
 				  <div class="form-group">
 				    <label for="discount" class="col-sm-3 control-label">Discount</label>
 				    <div class="col-sm-9">
+
+                        <input type="radio" id="radio1" onclick="check1()" name="money" value="1">Money <br>
+                        <input type="radio" id="radio2" onclick="check2()" name="percentage" value="2">Percentage <br>
 				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" />
 				    </div>
 				  </div> <!--/form-group-->	
@@ -552,7 +555,26 @@ if($_GET['o'] == 'add') {
 </div><!-- /.modal -->
 <!-- /remove order-->
 
+<script>
+    document.getElementById('radio1').checked=true;
+    function check1()
+    {
+        if(document.getElementById('radio2').checked)
+        {
+            //alert ("You Have Already Choosen Discount");
+        }
+        document.getElementById('radio2').checked=false;
+    }
+    function check2()
+    {
+        if(document.getElementById('radio1').checked)
+        {
+            //alert ("You Have Already Choosen Taka");
+        }
+        document.getElementById('radio1').checked=false;
+    }
 
+</script>
 <script src="custom/js/order.js"></script>
 
 <?php require_once 'includes/footer.php'; ?>

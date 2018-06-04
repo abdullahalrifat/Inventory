@@ -576,7 +576,7 @@ function subAmount() {
 	} else {
 		$("#grandTotal").val(totalAmount);
 		$("#grandTotalValue").val(totalAmount);
-	} // /else discount	
+	} // /else discount
 
 	var paidAmount = $("#paid").val();
 	if(paidAmount) {
@@ -584,41 +584,83 @@ function subAmount() {
 		paidAmount = paidAmount.toFixed(2);
 		$("#due").val(paidAmount);
 		$("#dueValue").val(paidAmount);
-	} else {	
+	} else {
 		$("#due").val($("#grandTotal").val());
 		$("#dueValue").val($("#grandTotal").val());
 	} // else
 
 } // /sub total amount
 
-function discountFunc() {
-	var discount = $("#discount").val();
- 	var totalAmount = Number($("#totalAmount").val());
- 	totalAmount = totalAmount.toFixed(2);
+function discountFunc()
+{
+	//alert("in disc");
+    if ($('#radio1').is(":checked"))
+    {
+        var discount = $("#discount").val();
+        var totalAmount = Number($("#totalAmount").val());
+        totalAmount = totalAmount.toFixed(2);
 
- 	var grandTotal;
- 	if(totalAmount) { 	
- 		grandTotal = Number($("#totalAmount").val()) - Number($("#discount").val());
- 		grandTotal = grandTotal.toFixed(2);
+        var grandTotal;
+        if(totalAmount) {
+            grandTotal = Number($("#totalAmount").val()) - Number($("#discount").val());
+            grandTotal = grandTotal.toFixed(2);
+            //alert(grandTotal);
+            $("#grandTotal").val(grandTotal);
+            $("#grandTotalValue").val(grandTotal);
+        } else
+        {
+        }
 
- 		$("#grandTotal").val(grandTotal);
- 		$("#grandTotalValue").val(grandTotal);
- 	} else {
- 	}
+        var paid = $("#paid").val();
 
- 	var paid = $("#paid").val();
+        var dueAmount;
+        if(paid) {
+            dueAmount = Number($("#grandTotal").val()) - Number($("#paid").val());
+            dueAmount = dueAmount.toFixed(2);
 
- 	var dueAmount; 	
- 	if(paid) {
- 		dueAmount = Number($("#grandTotal").val()) - Number($("#paid").val());
- 		dueAmount = dueAmount.toFixed(2);
+            $("#due").val(dueAmount);
+            $("#dueValue").val(dueAmount);
+        } else {
+            $("#due").val($("#grandTotal").val());
+            $("#dueValue").val($("#grandTotal").val());
+        }
+    }
+    else if($('#radio2').is(":checked"))
+	{
+        var discount = $("#discount").val();
+        var totalAmount = Number($("#totalAmount").val());
+        totalAmount = totalAmount.toFixed(2);
 
- 		$("#due").val(dueAmount);
- 		$("#dueValue").val(dueAmount);
- 	} else {
- 		$("#due").val($("#grandTotal").val());
- 		$("#dueValue").val($("#grandTotal").val());
- 	}
+        var grandTotal;
+        if(totalAmount)
+        {
+            grandTotal = Number($("#totalAmount").val()) - (((Number($("#discount").val()))/100)*(Number($("#totalAmount").val())));
+            grandTotal = grandTotal.toFixed(2);
+			//alert(grandTotal);
+            $("#grandTotal").val(grandTotal);
+            $("#grandTotalValue").val(grandTotal);
+        }
+        else
+        {
+        }
+
+        var paid = $("#paid").val();
+
+        var dueAmount;
+        if(paid) {
+            dueAmount = Number($("#grandTotal").val()) - Number($("#paid").val());
+            dueAmount = dueAmount.toFixed(2);
+
+            $("#due").val(dueAmount);
+            $("#dueValue").val(dueAmount);
+        } else {
+            $("#due").val($("#grandTotal").val());
+            $("#dueValue").val($("#grandTotal").val());
+        }
+	}
+	//alert("You Must Choose One");
+
+
 
 } // /discount function
 
