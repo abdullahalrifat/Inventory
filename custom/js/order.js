@@ -182,12 +182,12 @@ $(document).ready(function() {
 					
 	} else if(divRequest == 'editOrd') {
 		$("#orderDate").datepicker();
-
+        alert("in this");
 		// edit order form function
 		$("#editOrderForm").unbind('submit').bind('submit', function() {
 			// alert('ok');
 			var form = $(this);
-
+            alert("in this");
 			$('.form-group').removeClass('has-error').removeClass('has-success');
 			$('.text-danger').remove();
 				
@@ -198,7 +198,7 @@ $(document).ready(function() {
 			var discount = $("#discount").val();
 			var paymentType = $("#paymentType").val();
 			var paymentStatus = $("#paymentStatus").val();		
-
+            //alert(clientName+" "+clientContact);
 			// form validation 
 			if(orderDate == "") {
 				$("#orderDate").after('<p class="text-danger"> The Order Date field is required </p>');

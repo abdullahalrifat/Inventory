@@ -1,4 +1,5 @@
-<?php 
+
+<?php
 require_once 'php_action/db_connect.php'; 
 require_once 'includes/header.php'; 
 
@@ -15,6 +16,7 @@ if($_GET['o'] == 'add') {
 ?>
 
 <ol class="breadcrumb">
+
   <li><a href="dashboard.php">Home</a></li>
   <li>Order</li>
   <li class="active">
@@ -262,7 +264,7 @@ if($_GET['o'] == 'add') {
 
   			<?php $orderId = $_GET['i'];
 
-  			$sql = "SELECT orders.order_id, orders.order_date, orders.client_name, orders.client_contact, orders.sub_total, orders.vat, orders.total_amount, orders.discount, orders.grand_total, orders.paid, orders.due, orders.payment_type, orders.payment_status FROM orders 	
+  			$sql = "SELECT orders.order_id, orders.order_date,(SELECT Name FROM contact WHERE Mobile =client_name), orders.client_contact, orders.sub_total, orders.vat, orders.total_amount, orders.discount, orders.grand_total, orders.paid, orders.due, orders.payment_type, orders.payment_status FROM orders 	
 					WHERE orders.order_id = {$orderId}";
 
 				$result = $connect->query($sql);
@@ -278,10 +280,11 @@ if($_GET['o'] == 'add') {
 			  <div class="form-group">
                   <label for="clientName" class="col-sm-2 control-label">Client Name</label>
                   <div class="col-sm-10">
-                      <select onchange="myFunction2()" name="editclientName" id="editclientName" class="form-control">
+                      <select onchange="myFunction2()" name="editclientName" id="editclientName" class="form-control"  value="<?php echo $data[2] ?>" >
                       </select>
                   </div>
 			  </div> <!--/form-group-->
+
 			  <div class="form-group">
 			    <label for="clientContact" class="col-sm-2 control-label">Client Contact</label>
 			    <div class="col-sm-10">
@@ -470,6 +473,7 @@ if($_GET['o'] == 'add') {
 
             <script>
                 $(document).ready(function() {
+
                     var editclientName = document.getElementById("editclientName");
                     var optionN = document.createElement("option");
                     optionN.text = "~~SELECT~~";
@@ -503,6 +507,9 @@ if($_GET['o'] == 'add') {
                             }
                         }
                     });
+                    var name = "<?php echo $data[2] ?>";
+                    $("#editclientName option:contains("+name+")").attr('selected', true);
+                    myFunction2();
 
                 });
                 function myFunction2()
@@ -670,8 +677,8 @@ if($_GET['o'] == 'add') {
     });
 
 </script>
-<script src="custom/js/order.js"></script>
 
+<script src="custom/js/order.js"></script>
 <?php require_once 'includes/footer.php'; ?>
 
 

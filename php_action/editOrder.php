@@ -8,8 +8,8 @@ if($_POST) {
 	$orderId = $_POST['orderId'];
 
 	$orderDate 						= date('Y-m-d', strtotime($_POST['orderDate']));
-  $clientName 					= $_POST['clientName'];
-  $clientContact 				= $_POST['clientContact'];
+  $clientName 					= $_POST['editclientName'];
+  $clientContact 				= $_POST['editclientContact'];
   $subTotalValue 				= $_POST['subTotalValue'];
   $vatValue 						=	$_POST['vatValue'];
   $totalAmountValue     = $_POST['totalAmountValue'];
@@ -83,6 +83,7 @@ if($_POST) {
 	$connect->close();
 
 	echo json_encode($valid);
- 
+    echo '<script type="text/javascript"> window.open("../orders.php?o=manord","_self");</script>';
+    die();
 } // /if $_POST
 // echo json_encode($valid);
