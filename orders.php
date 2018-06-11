@@ -276,15 +276,16 @@ if($_GET['o'] == 'add') {
 			    </div>
 			  </div> <!--/form-group-->
 			  <div class="form-group">
-			    <label for="clientName" class="col-sm-2 control-label">Client Name</label>
-			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="clientName" name="clientName" placeholder="Client Name" autocomplete="off" value="<?php echo $data[2] ?>" />
-			    </div>
+                  <label for="clientName" class="col-sm-2 control-label">Client Name</label>
+                  <div class="col-sm-10">
+                      <select onchange="myFunction2()" name="editclientName" id="editclientName" class="form-control">
+                      </select>
+                  </div>
 			  </div> <!--/form-group-->
 			  <div class="form-group">
 			    <label for="clientContact" class="col-sm-2 control-label">Client Contact</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="clientContact" name="clientContact" placeholder="Contact Number" autocomplete="off" value="<?php echo $data[3] ?>" />
+			      <input type="text" class="form-control" id="editclientContact" name="editclientContact" placeholder="Contact Number" autocomplete="off" value="<?php echo $data[3] ?>" />
 			    </div>
 			  </div> <!--/form-group-->			  
 
@@ -387,6 +388,8 @@ if($_GET['o'] == 'add') {
 				  <div class="form-group">
 				    <label for="discount" class="col-sm-3 control-label">Discount</label>
 				    <div class="col-sm-9">
+                        <input type="radio" id="radio1" onclick="check1()" name="money" value="1">Money <br>
+                        <input type="radio" id="radio2" onclick="check2()" name="percentage" value="2">Percentage <br>
 				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" value="<?php echo $data[7] ?>" />
 				    </div>
 				  </div> <!--/form-group-->	
@@ -465,6 +468,49 @@ if($_GET['o'] == 'add') {
 			  </div>
 			</form>
 
+            <script>
+                $(document).ready(function() {
+                    var editclientName = document.getElementById("editclientName");
+                    var optionN = document.createElement("option");
+                    optionN.text = "~~SELECT~~";
+                    optionN.value=-1;
+                    editclientName.add(optionN);
+                    $.ajax({
+                        type: 'POST',
+                        url: 'php_action/fetchCustomerContact.php',
+                        async:false,
+                        data: {
+                        },
+                        error: function (xhr, status) {
+                            alert(status);
+                        },
+                        success: function(data) {
+                            //when found names sending them in datalist for suggetions
+                            //alert(data);
+                            var obj = JSON.parse(data);
+
+                            var datas=obj.data;
+                            //alert(datas);
+                            var options = '';
+
+                            for (var key in datas) {
+                                //alert(key);
+                                var option = document.createElement("option");
+                                option.text = datas[key].name;
+                                option.value=datas[key].phone;
+                                editclientName.add(option);
+
+                            }
+                        }
+                    });
+
+                });
+                function myFunction2()
+                {
+                    var y = document.getElementById("editclientName");
+                    document.getElementById("editclientContact").value = y.value;
+                }
+            </script>
 			<?php
 		} // /get order else  ?>
 
@@ -578,15 +624,21 @@ if($_GET['o'] == 'add') {
     {
         var x = document.getElementById("clientName");
         document.getElementById("clientContact").value = x.value;
+
+
     }
+
 
     $(document).ready(function() {
 
         var clientName = document.getElementById("clientName");
+
         var option = document.createElement("option");
         option.text = "~~SELECT~~";
         option.value=-1;
         clientName.add(option);
+
+
         $.ajax({
             type: 'POST',
             url: 'php_action/fetchCustomerContact.php',

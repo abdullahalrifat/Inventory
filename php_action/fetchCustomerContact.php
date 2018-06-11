@@ -13,9 +13,6 @@ if($result->num_rows > 0) {
     $activeCategories = "";
 
     while($row = $result->fetch_array()) {
-
-
-
         $output['data'][] = array(
             name=>$row[2],
             phone=>$row[4]
