@@ -16,7 +16,7 @@ if($_GET['o'] == 'add') {
 ?>
 
 <ol class="breadcrumb">
-
+    <script src="custom/js/order.js"></script>
   <li><a href="dashboard.php">Home</a></li>
   <li>Order</li>
   <li class="active">
@@ -678,7 +678,7 @@ if($_GET['o'] == 'add') {
 
 </script>
 
-<script src="custom/js/order.js"></script>
+
 <?php require_once 'includes/footer.php'; ?>
 
 

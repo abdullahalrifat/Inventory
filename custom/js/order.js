@@ -182,19 +182,20 @@ $(document).ready(function() {
 					
 	} else if(divRequest == 'editOrd') {
 		$("#orderDate").datepicker();
-        alert("in this");
+         //alert("in this");
 		// edit order form function
 		$("#editOrderForm").unbind('submit').bind('submit', function() {
 			// alert('ok');
 			var form = $(this);
-            alert("in this");
+
 			$('.form-group').removeClass('has-error').removeClass('has-success');
 			$('.text-danger').remove();
 				
 			var orderDate = $("#orderDate").val();
-			var clientName = $("#clientName").val();
-			var clientContact = $("#clientContact").val();
+			var clientName = $("#editclientName").val();
+			var clientContact = $("#editclientContact").val();
 			var paid = $("#paid").val();
+
 			var discount = $("#discount").val();
 			var paymentType = $("#paymentType").val();
 			var paymentStatus = $("#paymentStatus").val();		
@@ -220,6 +221,7 @@ $(document).ready(function() {
 			} else {
 				$('#clientContact').closest('.form-group').addClass('has-success');
 			} // /else
+
 
 			if(paid == "") {
 				$("#paid").after('<p class="text-danger"> The Paid field is required </p>');
@@ -275,8 +277,9 @@ $(document).ready(function() {
 	   	var validateQuantity;
 	   	for (var x = 0; x < quantity.length; x++) {       
 	 			var quantityId = quantity[x].id;
+	 			//alert(quantity[x].value);
 		    if(quantity[x].value == ''){	    	
-		    	$("#"+quantityId+"").after('<p class="text-danger"> Product Name Field is required!! </p>');
+		    	$("#"+quantityId+"").after('<p class="text-danger"> Product Quantity Field is required!! </p>');
 		    	$("#"+quantityId+"").closest('.form-group').addClass('has-error');	    		    		    	
 	      } else {      	
 		    	$("#"+quantityId+"").closest('.form-group').addClass('has-success');	    		    		    		    	
