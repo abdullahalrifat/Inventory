@@ -369,7 +369,20 @@ if(isset($_GET["from"]))
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     <!-- /categories brand -->
+<script>
+    $('#productImage').bind('change', function() {
+        var input = document.getElementById('productImage');
+        file = input.files[0];
+        //this.files[0].size gets the size of your file.
+        //if(file.size)
+       if(file.size > 100000){
+           alert("File Size Is Greater Than 100KB");
+           document.getElementById("productImage").value = "";
+       }
 
+    });
+
+</script>
 
     <script src="custom/js/product.js"></script>
 
