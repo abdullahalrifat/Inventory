@@ -49,8 +49,24 @@ if(isset($_GET["from"]))
             </div> <!-- /panel -->
         </div> <!-- /col-md-12 -->
     </div> <!-- /row -->
+    <script>
 
-
+        if( "<?php echo $countLowStock ?>" !=null &&  "<?php echo $countLowStock ?>" !="")
+        {
+            //alert("low stock");
+            manageProductTable = $('#manageProductTable').DataTable({
+                'ajax': 'php_action/fetchLowStockProduct.php',
+                'order': []
+            });
+        }
+        else {
+           // alert("no low stock");
+            manageProductTable = $('#manageProductTable').DataTable({
+                'ajax': 'php_action/fetchProduct.php',
+                'order': []
+            });
+        }
+    </script>
     <!-- add product -->
     <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog">
         <div class="modal-dialog">
