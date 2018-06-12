@@ -75,51 +75,17 @@ CREATE TABLE `accounting` (
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `brands`
---
-
-CREATE TABLE `brands` (
-  `brand_id` int(11) NOT NULL,
-  `brand_name` varchar(255) NOT NULL,
-  `brand_active` int(11) NOT NULL DEFAULT '0',
-  `brand_status` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `brands`
---
-
-INSERT INTO `brands` (`brand_id`, `brand_name`, `brand_active`, `brand_status`) VALUES
-(1, 'Gap', 1, 2),
-(2, 'Forever 21', 1, 2),
-(3, 'Gap', 1, 2),
-(4, 'Forever 21', 1, 2),
-(5, 'Adidas', 1, 2),
-(6, 'Gap', 1, 2),
-(7, 'Forever 21', 1, 2),
-(8, 'Adidas', 1, 2),
-(9, 'Gap', 1, 2),
-(10, 'Forever 21', 1, 2),
-(11, 'Adidas', 1, 2),
-(12, 'Gap', 1, 2),
-(13, 'Forever 21', 1, 2),
-(14, 'ASUS', 1, 2),
-(15, 'ASUS', 1, 2),
-(16, 'ASUS', 1, 1),
-(17, 'Laptop', 1, 2);
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
-  `categories_id` int(11) NOT NULL,
+  `categories_id` int(11) NOT NULL AUTO_INCREMENT,
   `categories_name` varchar(255) NOT NULL,
   `categories_active` int(11) NOT NULL DEFAULT '0',
-  `categories_status` int(11) NOT NULL DEFAULT '0'
+  `categories_status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (categories_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -141,6 +107,44 @@ INSERT INTO `categories` (`categories_id`, `categories_name`, `categories_active
 
 -- --------------------------------------------------------
 
+--
+-- Table structure for table `brands`
+--
+
+CREATE TABLE `brands` (
+  `brand_id` int(11) NOT NULL,
+  `brand_name` varchar(255) NOT NULL,
+  `categories_id` int(11) NOT NULL DEFAULT '0',
+  `brand_active` int(11) NOT NULL DEFAULT '0',
+  `brand_status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (brand_id),
+   FOREIGN KEY (categories_id) REFERENCES categories(categories_id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `brands`
+--
+
+INSERT INTO `brands` (`brand_id`, `brand_name`, `brand_active`, `brand_status`, `categories_id`) VALUES
+(1, 'Gap', 1, 2, 5),
+(2, 'Forever 21', 1, 2, 5),
+(3, 'Gap', 1, 2, 5),
+(4, 'Forever 21', 1, 2, 5),
+(5, 'Adidas', 1, 2, 8),
+(6, 'Gap', 1, 2, 5),
+(7, 'Forever 21', 1, 2, 5),
+(8, 'Adidas', 1, 2, 8),
+(9, 'Gap', 1, 2, 5),
+(10, 'Forever 21', 1, 2, 5),
+(11, 'Adidas', 1, 2, 8),
+(12, 'Gap', 1, 2, 5),
+(13, 'Forever 21', 1, 2, 5),
+(14, 'ASUS', 1, 2, 9),
+(15, 'ASUS', 1, 2, 9),
+(16, 'ASUS', 1, 1, 9),
+(17, 'Laptop', 1, 2, 11);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `orders`
@@ -307,17 +311,6 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `email`) VALUES
 --
 
 
---
--- Indexes for table `brands`
---
-ALTER TABLE `brands`
-  ADD PRIMARY KEY (`brand_id`);
-
---
--- Indexes for table `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`categories_id`);
 
 
 --
@@ -355,11 +348,6 @@ ALTER TABLE `users`
 ALTER TABLE `brands`
   MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
---
--- AUTO_INCREMENT for table `categories`
---
-ALTER TABLE `categories`
-  MODIFY `categories_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 
 --

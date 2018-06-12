@@ -7,9 +7,10 @@ $valid['success'] = array('success' => false, 'messages' => array());
 if($_POST) {	
 
 	$brandName = $_POST['brandName'];
-  $brandStatus = $_POST['brandStatus']; 
+    $brandCategory = $_POST['brandCatagory'];
+    $brandStatus = $_POST['brandStatus'];
 
-	$sql = "INSERT INTO brands (brand_name, brand_active, brand_status) VALUES ('$brandName', '$brandStatus', 1)";
+	$sql = "INSERT INTO brands (brand_name, categories_id, brand_active, brand_status) VALUES ('$brandName', '$brandCategory', '$brandStatus', 1)";
 
 	if($connect->query($sql) === TRUE) {
 	 	$valid['success'] = true;

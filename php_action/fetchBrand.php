@@ -2,7 +2,9 @@
 
 require_once 'core.php';
 
-$sql = "SELECT brand_id, brand_name, brand_active, brand_status FROM brands WHERE brand_status = 1";
+$sql = "SELECT brand_id, brand_name, brand_active, brand_status, 
+(SELECT categories_name FROM `categories` WHERE categories.categories_id=brands.categories_id) 
+FROM brands WHERE brand_status = 1";
 $result = $connect->query($sql);
 
 $output = array('data' => array());
@@ -35,8 +37,9 @@ if($result->num_rows > 0) {
 	</div>';
 
  	$output['data'][] = array( 		
- 		$row[1], 		
- 		$activeBrands,
+ 		$row[1],
+        $row[4],
+        $activeBrands,
  		$button
  		); 	
  } // /while 

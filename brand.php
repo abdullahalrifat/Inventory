@@ -25,6 +25,7 @@
 					<thead>
 						<tr>							
 							<th>Brand Name</th>
+                            <th>Catagory</th>
 							<th>Status</th>
 							<th style="width:15%;">Options</th>
 						</tr>
@@ -56,8 +57,17 @@
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="brandName" placeholder="Brand Name" name="brandName" autocomplete="off">
 				    </div>
-	        </div> <!-- /form-group-->	         	        
-	        <div class="form-group">
+	        </div> <!-- /form-group-->
+              <div class="form-group">
+                  <label for="brandCatagory" class="col-sm-3 control-label">Catagory: </label>
+                  <label class="col-sm-1 control-label">: </label>
+                  <div class="col-sm-8">
+                      <select class="form-control" id="brandCatagory" name="brandCatagory">
+                          <option value="">~~SELECT~~</option>
+                      </select>
+                  </div>
+              </div> <!-- /form-group-->
+              <div class="form-group">
 	        	<label for="brandStatus" class="col-sm-3 control-label">Status: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
@@ -112,7 +122,18 @@
 					    <div class="col-sm-8">
 					      <input type="text" class="form-control" id="editBrandName" placeholder="Brand Name" name="editBrandName" autocomplete="off">
 					    </div>
-		        </div> <!-- /form-group-->	         	        
+		        </div> <!-- /form-group-->
+                  <div class="form-group">
+                      <label for="editbrandCatagory" class="col-sm-3 control-label">Catagory: </label>
+                      <label class="col-sm-1 control-label">: </label>
+                      <div class="col-sm-8">
+                          <span id="edit_span">
+                                  <select class="form-control" id="editbrandCatagory" name="editbrandCatagory">
+                                      <option value="">~~SELECT~~</option>
+                                  </select>
+                          </span>
+                      </div>
+                  </div> <!-- /form-group-->
 		        <div class="form-group">
 		        	<label for="editBrandStatus" class="col-sm-3 control-label">Status: </label>
 		        	<label class="col-sm-1 control-label">: </label>
@@ -164,7 +185,51 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- /remove brand -->
+<script>
+    $(document).ready(function() {
 
+        var editbrandCatagory = document.getElementById("editbrandCatagory");
+        var brandCatagory = document.getElementById("brandCatagory");
+
+
+        $.ajax({
+            type: 'POST',
+            url: 'php_action/fetchCategoriesRaw.php',
+            async:false,
+            data: {
+            },
+            error: function (xhr, status) {
+                alert(status);
+            },
+            success: function(data) {
+                //when found names sending them in datalist for suggetions
+                //alert(data);
+                var obj = JSON.parse(data);
+
+                var datas=obj.data;
+                //alert(datas);
+                var options = '';
+                for (var key in datas) {
+                    //alert(key);
+                    var option = document.createElement("option");
+                    option.text = datas[key].Name;
+                    option.value=datas[key].id;
+                    brandCatagory.add(option);
+
+                }
+                for (var key in datas) {
+                    //alert(key);
+                    var option = document.createElement("option");
+                    option.text = datas[key].Name;
+                    option.value=datas[key].id;
+                    editbrandCatagory.add(option);
+
+                }
+            }
+        });
+
+    });
+</script>
 <script src="custom/js/brand.js"></script>
 
 <?php require_once 'includes/footer.php'; ?>

@@ -19,7 +19,8 @@ $(document).ready(function() {
 
 		var brandName = $("#brandName").val();
 		var brandStatus = $("#brandStatus").val();
-
+        var brandCatagory = $('#brandCatagory').find(":selected").text();
+       // alert(brandCatagory);
 		if(brandName == "") {
 			$("#brandName").after('<p class="text-danger">Brand Name field is required</p>');
 			$('#brandName').closest('.form-group').addClass('has-error');
@@ -29,6 +30,15 @@ $(document).ready(function() {
 			// success out for form 
 			$("#brandName").closest('.form-group').addClass('has-success');	  	
 		}
+        if(brandCatagory == "") {
+            $("#brandCatagory").after('<p class="text-danger">Brand Catagory field is required</p>');
+            $('#brandCatagory').closest('.form-group').addClass('has-error');
+        } else {
+            // remov error text field
+            $("#brandCatagory").find('.text-danger').remove();
+            // success out for form
+            $("#brandCatagory").closest('.form-group').addClass('has-success');
+        }
 
 		if(brandStatus == "") {
 			$("#brandStatus").after('<p class="text-danger">Brand Name field is required</p>');
@@ -41,7 +51,7 @@ $(document).ready(function() {
 			$("#brandStatus").closest('.form-group').addClass('has-success');	  	
 		}
 
-		if(brandName && brandStatus) {
+		if(brandName && brandStatus && brandCatagory) {
 			var form = $(this);
 			// button loading
 			$("#createBrandBtn").button('loading');
@@ -54,10 +64,10 @@ $(document).ready(function() {
 				success:function(response) {
 					// button loading
 					$("#createBrandBtn").button('reset');
-
+                    //alert(response.success);
 					if(response.success == true) {
 						// reload the manage member table 
-						manageBrandTable.ajax.reload(null, false);						
+						manageBrandTable.ajax.reload(null, false);
 
   	  			// reset the form text
 						$("#submitBrandForm")[0].reset();
@@ -121,6 +131,11 @@ function editBrands(brandId = null) {
 				$('#editBrandName').val(response.brand_name);
 				// setting the brand status value
 				$('#editBrandStatus').val(response.brand_active);
+
+                // setting the brand category value
+				var category=response.categories_id;
+                $('#edit_span select option[value="' + category + '"]').prop('selected', true);
+
 				// brand id 
 				$(".editBrandFooter").after('<input type="hidden" name="brandId" id="brandId" value="'+response.brand_id+'" />');
 
@@ -134,7 +149,7 @@ function editBrands(brandId = null) {
 
 					var brandName = $('#editBrandName').val();
 					var brandStatus = $('#editBrandStatus').val();
-
+                    var brandCatagory = $('#brandCatagory').find(":selected").text();
 					if(brandName == "") {
 						$("#editBrandName").after('<p class="text-danger">Brand Name field is required</p>');
 						$('#editBrandName').closest('.form-group').addClass('has-error');
@@ -144,6 +159,16 @@ function editBrands(brandId = null) {
 						// success out for form 
 						$("#editBrandName").closest('.form-group').addClass('has-success');	  	
 					}
+
+                    if(brandCatagory == "") {
+                        $("#brandCatagory").after('<p class="text-danger">Brand Catagory field is required</p>');
+                        $('#brandCatagory').closest('.form-group').addClass('has-error');
+                    } else {
+                        // remov error text field
+                        $("#brandCatagory").find('.text-danger').remove();
+                        // success out for form
+                        $("#brandCatagory").closest('.form-group').addClass('has-success');
+                    }
 
 					if(brandStatus == "") {
 						$("#editBrandStatus").after('<p class="text-danger">Brand Name field is required</p>');
@@ -156,7 +181,7 @@ function editBrands(brandId = null) {
 						$("#editBrandStatus").closest('.form-group').addClass('has-success');	  	
 					}
 
-					if(brandName && brandStatus) {
+					if(brandName && brandStatus && brandCatagory) {
 						var form = $(this);
 
 						// submit btn
